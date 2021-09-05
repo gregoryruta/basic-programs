@@ -1,0 +1,49 @@
+PRINT greeting
+WHILE true
+	PRINT menu ("1. Calculate Power | 2. Calculate Resistance | 3. Exit")
+	READ menu selection into userInput (string)
+	INSERT userInput (string) into ss (stringstream)
+	IF stringsteam can extract to placeHolder (int) AND cannot extract to bin (string) THEN
+		menuSelection (int) = placeHolder (int)
+	ELSE
+		menuSelection (int) = 0
+	END IF
+	SWITCH menuSelection (int)
+		CASE 1:
+		CASE 2:
+			WHILE true
+				PRINT enter voltage
+				READ voltage value into userInput (string)
+				INSERT userInput (string) into ss (stringstream)
+				IF stringsteam can extract to placeHolder (double) AND cannot extract to bin (string) THEN
+					v (double) = placeHolder (double)
+					BREAK WHILE
+				ELSE
+					PRINT invalid input
+				END IF
+			END WHILE
+			WHILE true
+				PRINT enter current
+				READ current value into userInput (string)
+				INSERT userInput (string) into ss (stringstream)
+				IF stringsteam can extract to placeHolder (double) AND cannot extract to bin (string) THEN
+					i (double) = placeHolder (double)
+					BREAK WHILE
+				ELSE
+					PRINT invalid input
+				END IF
+			END WHILE
+			IF menuSelection (int) = 1 THEN
+				COMPUTER power
+				PRINT power
+			ELSE
+				COMPUTE resistance
+				PRINT resistance
+			END IF
+			BREAK CASE 2 (and 1)
+		CASE 3:
+			EXIT program
+		DEFAULT:
+			PRINT invalid input
+	END SWITCH
+END WHILE

@@ -1,0 +1,197 @@
+//pseudocode (by function)
+
+--------------------------------------------------------------------------------
+
+//main
+PRINT greeting
+CALL readFile function that returns marksCount
+WHILE true
+	READ menu selection via menu function
+	SWITCH menu selection
+		CASE 1:
+			CALL displayMarks function
+		CASE 2:
+			PRINT calculateMean function return value
+		CASE 3:
+			PRINT calculateMedian function return value
+		CASE 4:
+			PRINT calculateMinimum function return value
+		CASE 5:
+			PRINT calculateMaximum function return value
+		CASE 6:
+			CALL getString function to get requestedId from user
+			IF findAverageForStudent returns -1
+				PRINT alert student id not found in file
+			ELSE
+				PRINT findAverageForStudent function return value
+			END IF
+		CASE 7:
+			PRINT updateFile function return value
+			CALL readFile function that returns marksCount
+			CALL displayMarks function
+		CASE 8:
+			EXIT PROGRAM
+		DEFAULT:
+			PRINT invalid input
+	END SWITCH
+END WHILE
+
+--------------------------------------------------------------------------------
+
+//readFile
+CALL openInput function
+WHILE(getline)
+	READ number of student marks
+	IGNORE student id
+	FOR number of student marks
+		READ mark
+		INCREMENT total number of marks read
+	END FOR
+END WHILE
+CLOSE input filestream
+RETURN total number of marks
+
+--------------------------------------------------------------------------------
+
+//menu
+INSERT menu prompt into stringstream. Convert to string
+CALL getString function & pass in menu prompt
+CALL isInt function & pass in user input
+IF isInt
+	RETURN user input AS integer
+ELSE
+	RETURN -1 (failure)
+END IF
+
+--------------------------------------------------------------------------------
+
+//displayMarks
+FOR number of marks in marksArray
+	PRINT mark
+END FOR
+
+--------------------------------------------------------------------------------
+
+//calculateMean
+FOR number of marks in marksArray
+	INCREMENT sum of marks read
+END FOR
+RETURN sum / number of marks
+
+--------------------------------------------------------------------------------
+
+//calculateMedian
+DUPLICATE marksArray
+CALL sortMinToMax to sort duplicate
+IF array count is even
+	CALCULATE median
+ELSE
+	CALCULATE median
+END IF
+RETURN median
+
+--------------------------------------------------------------------------------
+
+//findMinimum
+DUPLICATE marksArray
+CALL sortMinToMax to sort duplicate
+RETURN first value of sorted array
+
+--------------------------------------------------------------------------------
+
+//findMaximum
+DUPLICATE marksArray
+CALL sortMinToMax to sort duplicate
+RETURN last value of sorted array
+
+--------------------------------------------------------------------------------
+
+//findAverageForStudent
+CALL openInput function
+WHILE(getline)
+	READ number of student marks
+	READ student id
+	IF student id == requested id
+		FOR number of student marks
+			READ mark
+			INCREMENT sum of student's marks
+		END FOR
+		CLOSE input filestream
+		RETURN sum / number of student's marks
+	ELSE
+		FOR number of student marks
+			IGNORE mark
+		END FOR
+	END IF
+END WHILE
+CLOSE input filestream
+RETURN -1 (failure)
+
+--------------------------------------------------------------------------------
+
+//updateFile
+CALL openOutput function
+CALL getString function to get student id from user
+CALL getString function to get score count from user
+WHILE ((CALL isInt function & pass in user's score count string) returns false)
+	CALL getString function to get score count from user & show validation alert
+END WHILE
+WRITE score count to file
+WRITE student id to file
+FOR user's score count
+	CALL getString function to get score from user
+	WHILE ((CALL isInt function & pass in user's score string) returns false)
+		CALL getString function to get score from user & show validation alert
+	END WHILE
+	WRITE score to file
+END FOR
+CLOSE output filestream
+RETURN user's score count
+
+--------------------------------------------------------------------------------
+
+//openInput
+OPEN input filestream
+IF file fails to open
+	PRINT error
+	EXIT program
+END IF
+
+--------------------------------------------------------------------------------
+
+//openOutput
+OPEN output filestream
+IF file fails to open
+	PRINT error
+	EXIT program
+END IF
+
+--------------------------------------------------------------------------------
+
+//sortMinToMax
+FOR array (count - 1) AS i
+	FOR array count AS j
+		IF array[j] is less than array[j - 1]
+			SWAP array[j] with array[j - 1]
+		END IF
+	END FOR
+END FOR
+
+--------------------------------------------------------------------------------
+
+//getString
+PRINT prompt
+GET input
+RETURN input
+
+--------------------------------------------------------------------------------
+
+//isInt
+INSERT string arg into stringstream
+IF stringstream can EXTRACT into an int, and then not extract into a string
+	RETURN true
+ELSE
+	RETURN false
+END IF
+
+--------------------------------------------------------------------------------
